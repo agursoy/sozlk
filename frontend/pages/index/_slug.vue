@@ -118,11 +118,6 @@ export default {
       )}`
     },
   },
-  watch: {
-    '$route.params'(val) {
-      this.$fetch()
-    },
-  },
   head() {
     return {
       title: this.headTitle ? `${this.headTitle} | Sozlk.` : 'Sozlk.',
