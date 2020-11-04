@@ -1,0 +1,16 @@
+version: '3'
+services:
+  strapi:
+    build: ./backend
+    ports:
+      - "1337:1337"
+    network_mode: bridge
+    env_file:
+      - ./backend/.env
+  nuxt:
+    build: ./frontend
+    ports:
+      - "80:3000"
+    network_mode: bridge
+    env_file:
+      - ./frontend/.env

@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/dictionaries",
+      "handler": "dictionary.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/dictionaries/count",
+      "handler": "dictionary.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/dictionaries/:id",
+      "handler": "dictionary.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/dictionaries",
+      "handler": "dictionary.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/dictionaries/:id",
+      "handler": "dictionary.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/dictionaries/:id",
+      "handler": "dictionary.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: http://www.sozlk.com/feed/sitemap-index.xml
