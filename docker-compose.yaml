@@ -7,9 +7,7 @@ services:
     network_mode: bridge
     env_file:
       - ./frontend/.env
-    depends_on:
-      strapi:
-        condition: service_started
+    restart: always
   strapi:
     build: ./backend
     ports:
