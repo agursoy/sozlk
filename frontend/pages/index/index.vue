@@ -78,7 +78,7 @@
             </p>
             <p>
               <a
-                href="mailto:sozlk@gmail.com"
+                href="mailto:sozlkapp@gmail.com"
                 class="text-teal-600 hover:text-teal-700"
               >
                 Sozlk Mail &rarr;

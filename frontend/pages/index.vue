@@ -51,7 +51,7 @@
       <!-- ads on mobile --->
       <div
         class="w-full md:w-1/2 h-screen shadow-2xl px-3 py-6 object-cover"
-        style="background-image: url('https://source.unsplash.com/IXUM4cJynP0')"
+        style="background-image: url('/bg.jpeg')"
       >
         <nuxt-child :key="$route.params.id" class="result"></nuxt-child>
       </div>
@@ -74,7 +74,11 @@ export default {
     }
   },
   mounted() {
-    if (this.$route.params.slug) {
+    if (
+      window.innerWidth &&
+      window.innerWidth < 1024 &&
+      this.$route.params.slug
+    ) {
       this.scrollToResult()
     }
   },
