@@ -1,12 +1,5 @@
 version: '3'
 services:
-  strapi:
-    build: ./backend
-    ports:
-      - "1337:1337"
-    network_mode: bridge
-    env_file:
-      - ./backend/.env
   nuxt:
     build: ./frontend
     ports:
@@ -14,3 +7,13 @@ services:
     network_mode: bridge
     env_file:
       - ./frontend/.env
+    depends_on:
+      strapi:
+        condition: service_started
+  strapi:
+    build: ./backend
+    ports:
+      - "1337:1337"
+    network_mode: bridge
+    env_file:
+      - ./backend/.env
