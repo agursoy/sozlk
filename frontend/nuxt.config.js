@@ -143,7 +143,7 @@ export default {
     entities: ['dictionaries'],
   },
 
-  // Sitemap
+  /* Sitemap
   async sitemap() {
     const sitemaps = []
     const sitemapFunc = function (type, offset, limit) {
@@ -200,7 +200,7 @@ export default {
       path: '/feed/sitemap-index.xml',
       sitemaps,
     }
-  },
+  }, */
 
   // Custom Genereate
   generate: {
