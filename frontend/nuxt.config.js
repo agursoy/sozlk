@@ -191,6 +191,7 @@ export default {
         const offset = i * requestLimit
         const limit = i * requestLimit + requestLimit
         sitemaps.push({
+          hostname: process.env.URL,
           path: `/feed/sitemap-${item}-${offset}-${limit}.xml`,
           routes: sitemapFunc(item, offset, limit),
           exclude: ['/**'],
@@ -198,6 +199,7 @@ export default {
       }
     }
     return {
+      hostname: process.env.URL,
       path: '/feed/sitemap-index.xml',
       sitemaps,
     }
