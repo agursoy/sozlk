@@ -201,6 +201,8 @@ export default {
 
   // Custom Genereate
   generate: {
+    interval: 1000,
+    concurrency: 50,
     fallback: false,
     async routes(callback) {
       const base = process.env.API_URL || 'http://localhost:1337'
