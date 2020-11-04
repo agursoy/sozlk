@@ -173,12 +173,6 @@ export default {
       },
     }
     const types = ['words']
-    // push pages sitemap
-    sitemaps.push({
-      hostname: process.env.URL,
-      path: '/feed/sitemap-pages.xml',
-      exclude: ['/404', '/500'],
-    })
     // push content's sitemaps
     const requestLimit = 5000
     for (const item of types) {
