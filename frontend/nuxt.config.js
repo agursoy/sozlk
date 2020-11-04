@@ -143,7 +143,7 @@ export default {
     entities: ['dictionaries'],
   },
 
-  /* Sitemap
+  // Sitemap
   async sitemap() {
     const sitemaps = []
     const sitemapFunc = function (type, offset, limit) {
@@ -200,10 +200,11 @@ export default {
       path: '/feed/sitemap-index.xml',
       sitemaps,
     }
-  }, */
+  },
 
   // Custom Genereate
   generate: {
+    fallback: false,
     async routes(callback) {
       const base = process.env.API_URL || 'http://localhost:1337'
       const { data } = await axios.get(`${base}/dictionaries/count`)
