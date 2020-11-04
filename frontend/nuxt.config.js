@@ -221,7 +221,8 @@ export default {
           Math.ceil(count / requestLimit) > 0
             ? Math.ceil(count / requestLimit)
             : 1
-        for (let i = 0; i < repeat; i++) {
+
+        for await (const i of Array.from(Array(repeat).keys())) {
           const offset = i * requestLimit
           const limit = i * requestLimit + requestLimit
           const { data } = await axios.get(
@@ -238,7 +239,7 @@ export default {
                 payload: item,
               }
             })
-            callback(null, routes)
+            await callback(null, routes)
           }
         }
       }
