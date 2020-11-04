@@ -125,13 +125,13 @@ export default {
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     '@nuxtjs/strapi',
-    '@nuxtjs/sitemap',
     [
       '@nuxtjs/google-adsense',
       {
         test: true,
       },
     ],
+    '@nuxtjs/sitemap',
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
@@ -175,6 +175,7 @@ export default {
     const types = ['words']
     // push pages sitemap
     sitemaps.push({
+      hostname: process.env.URL,
       path: '/feed/sitemap-pages.xml',
       exclude: ['/404', '/500'],
     })
