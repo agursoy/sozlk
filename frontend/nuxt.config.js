@@ -202,8 +202,7 @@ export default {
   // Custom Genereate
   generate: {
     interval: 100,
-    concurrency: 250,
-    fallback: false,
+    fallback: true,
     async routes(callback) {
       const base = process.env.API_URL || 'http://localhost:1337'
       const { data } = await axios.get(`${base}/dictionaries/count`)
@@ -214,7 +213,7 @@ export default {
       }
       const types = ['words']
 
-      const requestLimit = 500
+      const requestLimit = 5000
       for (const item of types) {
         const count = info.counts[item]
         const repeat =
