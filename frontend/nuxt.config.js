@@ -201,8 +201,8 @@ export default {
 
   // Custom Genereate
   generate: {
-    interval: 1000,
-    concurrency: 50,
+    interval: 100,
+    concurrency: 250,
     fallback: false,
     async routes(callback) {
       const base = process.env.API_URL || 'http://localhost:1337'
@@ -214,7 +214,7 @@ export default {
       }
       const types = ['words']
 
-      const requestLimit = 5000
+      const requestLimit = 500
       for (const item of types) {
         const count = info.counts[item]
         const repeat =
@@ -233,7 +233,10 @@ export default {
           let routes = []
           if (data) {
             routes = data.map((item) => {
-              return `/${item.slug}`
+              return {
+                route: '/' + item.slug,
+                payload: item,
+              }
             })
             callback(null, routes)
           }
