@@ -229,7 +229,6 @@ export default {
     }
   },
 
-  /*
   // Custom Genereate
   generate: {
     concurrency: 5000,
@@ -284,5 +283,4 @@ export default {
       callback(null, routes)
     },
   },
-   */
 }
