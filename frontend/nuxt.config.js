@@ -131,7 +131,13 @@ export default {
         test: true,
       },
     ],
-    '@nuxtjs/sitemap',
+    [
+      '@nuxtjs/sitemap',
+      {
+        id: process.env.ADSENSE,
+        overlayBottom: true,
+      },
+    ],
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
