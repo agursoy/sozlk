@@ -67,12 +67,18 @@
 </template>
 <script>
 export default {
-  async asyncData({ route, $strapi }) {
-    const results = await $strapi.$dictionaries.find({
-      slug: route.params.slug,
-    })
-    return {
-      results,
+  async asyncData({ route, $strapi, payload }) {
+    if (payload) {
+      return {
+        results: payload,
+      }
+    } else {
+      const results = await $strapi.$dictionaries.find({
+        slug: route.params.slug,
+      })
+      return {
+        results,
+      }
     }
   },
   computed: {

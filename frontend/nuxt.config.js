@@ -227,7 +227,7 @@ export default {
 
   // Custom Genereate
   generate: {
-    concurrency: 5000,
+    concurrency: 500,
     interval: 100,
     fallback: true,
     async routes(callback) {
