@@ -9,16 +9,7 @@
           <div
             class="text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7"
           >
-            <div v-if="$fetchState.pending && slug">
-              <p
-                class="pt-6 text-base leading-6 font-bold sm:text-lg sm:leading-7"
-              >
-                Aranıyor..
-              </p>
-            </div>
-            <div
-              v-else-if="!$fetchState.pending && slug && results.length === 0"
-            >
+            <div v-if="slug && results.length === 0">
               <p
                 class="pt-6 text-base leading-6 font-bold sm:text-lg sm:leading-7"
               >
@@ -76,16 +67,12 @@
 </template>
 <script>
 export default {
-  async fetch() {
-    if (this.slug) {
-      this.results = await this.$strapi.$dictionaries.find({
-        slug: this.slug,
-      })
-    }
-  },
-  data() {
+  async asyncData({ route, $strapi }) {
+    const results = await $strapi.$dictionaries.find({
+      slug: route.params.slug,
+    })
     return {
-      results: [],
+      results,
     }
   },
   computed: {
