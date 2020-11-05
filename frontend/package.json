@@ -16,7 +16,7 @@
     "@nuxtjs/sitemap": "^2.4.0",
     "@nuxtjs/strapi": "^0.1.8",
     "core-js": "^3.6.5",
-    "nuxt": "^2.14.6",
+    "nuxt": "^2.14.7",
     "slugify": "^1.4.6",
     "smoothscroll-polyfill": "^0.4.4"
   },

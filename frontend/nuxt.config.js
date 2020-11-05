@@ -249,7 +249,7 @@ export default {
             ? Math.ceil(count / requestLimit)
             : 1
         const contentRequests = []
-        for (let i = 0; i <= repeat; i++) {
+        for (let i = 0; i < repeat; i++) {
           const offset = i * requestLimit
           const limit = i * requestLimit + requestLimit
           contentRequests.push(
@@ -261,7 +261,7 @@ export default {
             responses.forEach((response) => {
               response.data.forEach((item) => {
                 routes.push({
-                  route: '/' + item.slug,
+                  route: '/' + item.slug + '/',
                   payload: item,
                 })
               })

@@ -91,7 +91,7 @@ export default {
         strict: true,
         locale: 'tr',
       })
-      this.$router.push(`/${slug}`)
+      this.$router.push(`/${slug}/`)
       this.scrollToResult()
     },
     scrollToResult() {
