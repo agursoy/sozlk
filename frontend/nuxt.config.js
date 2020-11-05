@@ -107,7 +107,10 @@ export default {
   css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [{ src: '~plugins/smoothscroll.js', ssr: false }],
+  plugins: [
+    { src: '~/plugins/ga.js', ssr: false },
+    { src: '~plugins/smoothscroll.js', ssr: false },
+  ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -162,6 +165,11 @@ export default {
   // Router
   router: {
     trailingSlash: true,
+  },
+
+  // Env
+  env: {
+    googleAnalytics: process.env.GOOGLE_ANALYTICS,
   },
 
   // Sitemap
