@@ -86,7 +86,7 @@ export default {
       {
         hid: 'twitter:image',
         name: 'twitter:image',
-        content: `${process.env.URL}/share.jpg`,
+        content: `${process.env.URL}/share.png`,
       },
       {
         hid: 'twitter:site',
