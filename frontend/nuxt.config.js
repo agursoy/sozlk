@@ -231,7 +231,7 @@ export default {
     interval: 100,
     fallback: true,
     async routes(callback) {
-      const base = 'http://localhost:1337'
+      const base = process.env.API_URL || 'http://localhost:1337'
       const { data } = await axios.get(`${base}/dictionaries/count`)
       const info = {
         counts: {
