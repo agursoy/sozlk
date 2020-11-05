@@ -240,14 +240,10 @@ export default {
           axios.spread((...responses) => {
             responses.forEach((response) => {
               response.data.forEach((item) => {
-                routes.push(
-                  item.map((i) => {
-                    return {
-                      route: '/' + i.slug,
-                      payload: i,
-                    }
-                  })
-                )
+                routes.push({
+                  route: '/' + item.slug,
+                  payload: item,
+                })
               })
             })
           })
