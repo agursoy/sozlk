@@ -221,34 +221,39 @@ export default {
       const types = ['words']
 
       const requestLimit = 5000
+      const routes = []
       for (const item of types) {
         const count = info.counts[item]
         const repeat =
           Math.ceil(count / requestLimit) > 0
             ? Math.ceil(count / requestLimit)
             : 1
-
-        for await (const i of Array.from(Array(repeat).keys())) {
+        const contentRequests = []
+        for (let i = 0; i <= repeat; i++) {
           const offset = i * requestLimit
           const limit = i * requestLimit + requestLimit
-          const { data } = await axios.get(
-            `${base}/dictionaries?_start=${offset}&_limit=${limit}`
+          contentRequests.push(
+            axios.get(`${base}/dictionaries?_start=${offset}&_limit=${limit}`)
           )
-          console.log(
-            `fetched: ${base}/dictionaries?_start=${offset}&_limit=${limit}`
-          )
-          let routes = []
-          if (data) {
-            routes = data.map((item) => {
-              return {
-                route: '/' + item.slug,
-                payload: item,
-              }
-            })
-            await callback(null, routes)
-          }
         }
+        await axios.all(contentRequests).then(
+          axios.spread((...responses) => {
+            responses.forEach((response) => {
+              response.data.forEach((item) => {
+                routes.push(
+                  item.map((i) => {
+                    return {
+                      route: '/' + i.slug,
+                      payload: i,
+                    }
+                  })
+                )
+              })
+            })
+          })
+        )
       }
+      callback(null, routes)
     },
   },
 }
