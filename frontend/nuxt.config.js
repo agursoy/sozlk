@@ -163,6 +163,11 @@ export default {
     entities: ['dictionaries'],
   },
 
+  // Router
+  router: {
+    trailingSlash: true,
+  },
+
   // Sitemap
   async sitemap() {
     const sitemaps = []
@@ -209,6 +214,7 @@ export default {
           path: `/feed/sitemap-${item}-${offset}-${limit}.xml`,
           routes: sitemapFunc(item, offset, limit),
           exclude: ['/**'],
+          trailingSlash: true,
         })
       }
     }
