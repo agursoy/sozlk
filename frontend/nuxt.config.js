@@ -129,15 +129,11 @@ export default {
       '@nuxtjs/google-adsense',
       {
         test: true,
-      },
-    ],
-    [
-      '@nuxtjs/sitemap',
-      {
         id: process.env.ADSENSE,
         overlayBottom: true,
       },
     ],
+    // ['@nuxtjs/sitemap'],
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
@@ -227,10 +223,16 @@ export default {
 
   // Custom Genereate
   generate: {
-    concurrency: 500,
-    interval: 100,
+    concurrency: 5000,
     fallback: true,
     async routes(callback) {
+      const groupBy = function (xs, key) {
+        return xs.reduce(function (rv, x) {
+          ;(rv[x[key]] = rv[x[key]] || []).push(x)
+          return rv
+        }, {})
+      }
+
       const base = process.env.API_URL || 'http://localhost:1337'
       const { data } = await axios.get(`${base}/dictionaries/count`)
       const info = {
@@ -240,14 +242,18 @@ export default {
       }
       const types = ['words']
 
-      const requestLimit = 5000
+      const requestLimit = 100
       const routes = []
       for (const item of types) {
         const count = info.counts[item]
-        const repeat =
+        let repeat =
           Math.ceil(count / requestLimit) > 0
             ? Math.ceil(count / requestLimit)
             : 1
+
+        // test
+        repeat = 1
+
         const contentRequests = []
         for (let i = 0; i < repeat; i++) {
           const offset = i * requestLimit
@@ -259,12 +265,13 @@ export default {
         await axios.all(contentRequests).then(
           axios.spread((...responses) => {
             responses.forEach((response) => {
-              response.data.forEach((item) => {
+              const array = groupBy(response.data, 'slug')
+              for (const property in array) {
                 routes.push({
-                  route: '/' + item.slug + '/',
-                  payload: item,
+                  route: '/' + property + '/',
+                  payload: array[property],
                 })
-              })
+              }
             })
           })
         )
