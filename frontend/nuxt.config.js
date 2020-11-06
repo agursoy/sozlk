@@ -121,21 +121,18 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    // https://github.com/nuxt-community/google-adsense-module#readme
-    '@nuxtjs/google-adsense',
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     '@nuxtjs/strapi',
-    [
+    /* [
       '@nuxtjs/google-adsense',
       {
-        test: true,
         id: process.env.ADSENSE,
         overlayBottom: true,
       },
-    ],
+    ], */
     ['@nuxtjs/sitemap'],
   ],
 
