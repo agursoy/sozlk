@@ -11,13 +11,23 @@ const slugify = require('slugify');
 module.exports = {
   beforeSave: async model => {
     if (model.word) {
-      model.slug = slugify(model.word);
+      model.slug = slugify(model.word, {
+        replacement: '-',
+        lower: true,
+        strict: true,
+        locale: 'tr',
+      });
     }
   },
   beforeUpdate: async model => {
     if (model.getUpdate() && model.getUpdate().word) {
       model.update({
-        slug: slugify(model.getUpdate().word),
+        slug: slugify(model.getUpdate().word, {
+          replacement: '-',
+          lower: true,
+          strict: true,
+          locale: 'tr',
+        }),
       });
     }
   },

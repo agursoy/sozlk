@@ -19,6 +19,12 @@
     },
     "slug": {
       "type": "string"
+    },
+    "meta_1": {
+      "type": "string"
+    },
+    "meta_2": {
+      "type": "string"
     }
   }
 }
