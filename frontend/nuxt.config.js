@@ -213,7 +213,7 @@ export default {
         sitemaps.push({
           hostname: process.env.URL,
           path: `/feed/sitemap-${item}-${offset}-${limit}.xml`,
-          routes: sitemapFunc(item, offset, limit),
+          routes: sitemapFunc(item, offset, limit - offset),
           exclude: ['/**'],
           trailingSlash: true,
         })
