@@ -124,28 +124,40 @@
 import slugify from 'slugify'
 
 export default {
-  async asyncData({ $strapi }) {
-    const itemCount = 24
+  async asyncData({ $strapi, payload }) {
     let mostSearch = []
-    try {
-      const max = await $strapi.$http.$get(`dictionaries/count`)
-      const promises = []
+    const itemCount = 24
+    const max = 50000
+
+    if (payload) {
       for (let i = 0; i < itemCount; i++) {
-        const random = Math.floor(Math.random() * (max - 0 + 1))
-        promises.push(
-          $strapi.$http.$get(
-            `dictionaries?_start=${random - itemCount}&_limit=1`
+        const random = Math.floor(Math.random() * (max + 1))
+        if (payload[random]) {
+          mostSearch.push([payload[random]])
+        }
+      }
+      console.log('mS', mostSearch)
+    } else {
+      try {
+        const promises = []
+        for (let i = 0; i < itemCount; i++) {
+          const random = Math.floor(Math.random() * (max + 1))
+          promises.push(
+            $strapi.$http.$get(
+              `dictionaries?_start=${random - itemCount}&_limit=1`
+            )
           )
-        )
-      }
-      const result = await Promise.all(promises)
-      if (result.length) {
-        mostSearch = result
-      }
-      return {
-        mostSearch,
-      }
-    } catch (e) {}
+        }
+        const result = await Promise.all(promises)
+        if (result.length) {
+          mostSearch = result
+        }
+      } catch (e) {}
+    }
+
+    return {
+      mostSearch,
+    }
   },
   data() {
     return {
