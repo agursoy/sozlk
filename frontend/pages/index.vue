@@ -11,9 +11,15 @@
         <div
           class="flex justify-center md:justify-start pt-12 md:pl-12 md:-mb-24"
         >
-          <a href="#" class="bg-black text-white font-bold text-xl p-4"
-            >Sozlk.</a
-          >
+          <ul class="flex">
+            <li>
+              <nuxt-link
+                :to="'/'"
+                class="bg-black text-white font-bold text-xl p-4"
+                >Sozlk.</nuxt-link
+              >
+            </li>
+          </ul>
         </div>
 
         <div
@@ -61,6 +67,56 @@
         <adsbygoogle />
       </div>
     </div>
+    <div class="container my-12 mx-auto px-4 md:px-12">
+      <div class="px-4 pt-3 text-3xl">Sözlükten:</div>
+      <div class="flex flex-wrap -mx-1 lg:-mx-4">
+        <!-- Column -->
+        <div
+          v-for="(searchItem, key) in mostSearch"
+          :key="key"
+          class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3"
+        >
+          <div class="max-w-sm rounded shadow-lg">
+            <div class="px-6 py-4">
+              <div class="font-bold text-teal-500 text-xl mb-2">
+                <a target="_blank" :href="`/${searchItem[0].slug}/`">
+                  {{ searchItem[0].word }}
+                </a>
+              </div>
+              <p
+                class="text-gray-700 text-base h-12 md:h-24 overflow-hidden break-all"
+              >
+                {{ searchItem[0].meaning }}
+              </p>
+            </div>
+            <div class="px-6 pt-4 pb-2 flex justify-center">
+              <a target="_blank" :href="`/${searchItem[0].slug}/`">
+                <span
+                  class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                  >Tamamını Gör</span
+                >
+              </a>
+            </div>
+            <!-- div class="px-6 pt-4 pb-2">
+              <span
+                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >#photography</span
+              >
+              <span
+                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >#travel</span
+              >
+              <span
+                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >#winter</span
+              >
+            </div -->
+          </div>
+          <!-- END Article -->
+        </div>
+        <!-- END Column -->
+      </div>
+    </div>
   </div>
 </template>
 
@@ -68,6 +124,29 @@
 import slugify from 'slugify'
 
 export default {
+  async asyncData({ $strapi }) {
+    const itemCount = 24
+    let mostSearch = []
+    try {
+      const max = await $strapi.$http.$get(`dictionaries/count`)
+      const promises = []
+      for (let i = 0; i < itemCount; i++) {
+        const random = Math.floor(Math.random() * (max - 0 + 1))
+        promises.push(
+          $strapi.$http.$get(
+            `dictionaries?_start=${random - itemCount}&_limit=1`
+          )
+        )
+      }
+      const result = await Promise.all(promises)
+      if (result.length) {
+        mostSearch = result
+      }
+      return {
+        mostSearch,
+      }
+    } catch (e) {}
+  },
   data() {
     return {
       word: null,
