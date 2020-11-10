@@ -136,7 +136,6 @@ export default {
           mostSearch.push([payload[random]])
         }
       }
-      console.log('mS', mostSearch)
     } else {
       try {
         const promises = []
