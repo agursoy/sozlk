@@ -31,4 +31,10 @@ module.exports = {
 
     ctx.send(similar);
   },
+  find(ctx) {
+    if (ctx.query._q) {
+      return strapi.services.dictionary.search(ctx.query);
+    }
+    return strapi.services.dictionary.find(ctx.query, [ 'similars' ]);
+  },
 };
