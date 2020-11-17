@@ -1,13 +1,19 @@
 <template>
   <div class="flex flex-wrap">
-    <div class="hidden md:block md:w-1/10">
+    <!--div class="hidden md:block md:w-1/10">
       <div class="w-64 md:w-32 md:h-64">
         <adsbygoogle />
       </div>
-    </div>
-    <div class="w-full md:w-8/10 flex flex-wrap pr-0 md:pr-3">
+ </div-->
+    <div class="w-full flex flex-wrap">
       <!-- Login Section -->
-      <div class="w-full md:w-1/2 h-screen flex flex-col">
+      <div
+        class="w-full md:w-1/2 flex flex-col"
+        :class="{
+          'h-screen/1-8': mostSearch.length > 0,
+          'h-screen': mostSearch.length === 0,
+        }"
+      >
         <div
           class="flex justify-center md:justify-start pt-12 md:pl-12 md:-mb-24"
         >
@@ -49,27 +55,26 @@
         </div>
       </div>
       <!-- ads on mobile --->
-      <div class="block md:hidden py-3">
+      <!--div class="block md:hidden py-3">
         <div class="w-64 md:w-32 md:h-64">
           <adsbygoogle />
         </div>
-      </div>
+      </div-->
       <!-- ads on mobile --->
       <div
-        class="w-full md:w-1/2 h-screen shadow-2xl px-3 py-6 object-cover"
+        class="w-full md:w-1/2 h-auto shadow-2xl px-3 py-6 object-cover"
         style="background-image: url('/bg.jpeg')"
       >
         <nuxt-child :key="$route.params.id" class="result"></nuxt-child>
       </div>
     </div>
-    <div class="w-full md:w-1/10 pt-5 md:pt-0">
+    <!-- div class="w-full md:w-1/10 pt-5 md:pt-0">
       <div class="w-64 md:w-32 md:h-64">
         <adsbygoogle />
       </div>
-    </div>
-    <div class="container my-12 mx-auto px-4 md:px-12">
-      <div class="px-4 pt-3 text-3xl">Sözlükten:</div>
-      <div class="flex flex-wrap -mx-1 lg:-mx-4">
+    </div-->
+    <div class="container mx-auto px-4 md:px-12 pt-1">
+      <div class="flex flex-wrap lg:-mx-4">
         <!-- Column -->
         <div
           v-for="(searchItem, key) in mostSearch"
@@ -89,28 +94,24 @@
                 {{ searchItem[0].meaning }}
               </p>
             </div>
-            <div class="px-6 pt-4 pb-2 flex justify-center">
+            <div class="px-6 pt-4 pb-2">
+              <span
+                v-for="(similar, key) in searchItem[0].similars"
+                :key="key"
+                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                ><a target="_blank" :href="`/${similar.slug}/`"
+                  >#{{ similar.word }}</a
+                ></span
+              >
+            </div>
+            <div class="px-6 py-4 flex justify-center">
               <a target="_blank" :href="`/${searchItem[0].slug}/`">
                 <span
-                  class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                  class="bg-transparent hover:bg-teal-500 text-teal-700 hover:text-white py-2 px-4 border border-teal-500 hover:border-transparent rounded-full"
                   >Tamamını Gör</span
                 >
               </a>
             </div>
-            <!-- div class="px-6 pt-4 pb-2">
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                >#photography</span
-              >
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                >#travel</span
-              >
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                >#winter</span
-              >
-            </div -->
           </div>
           <!-- END Article -->
         </div>
@@ -124,8 +125,8 @@
 import slugify from 'slugify'
 
 export default {
-  async asyncData({ $strapi, payload }) {
-    let mostSearch = []
+  asyncData({ payload }) {
+    const mostSearch = []
     const itemCount = 24
     const max = 50000
 
@@ -137,6 +138,9 @@ export default {
         }
       }
     } else {
+      /*
+      TEST FOR LOCAL
+
       try {
         const promises = []
         for (let i = 0; i < itemCount; i++) {
@@ -148,10 +152,23 @@ export default {
           )
         }
         const result = await Promise.all(promises)
+
+        for (let i = 0; i < result.length; i++) {
+          const obj = result[i][0]
+          const simRes = await $strapi.$http.$post('similar', {
+            word: obj.word,
+            meta1: obj.meta_1,
+            meta2: obj.meta_2,
+          })
+
+          obj.similarity = simRes
+        }
+
         if (result.length) {
           mostSearch = result
         }
       } catch (e) {}
+       */
     }
 
     return {
@@ -171,6 +188,10 @@ export default {
     ) {
       this.scrollToResult()
     }
+
+    if (this.$route.query.word) {
+      this.word = this.$route.query.word
+    }
   },
   methods: {
     slugify,
@@ -182,6 +203,7 @@ export default {
         locale: 'tr',
       })
       this.$router.push(`/${slug}/`)
+      this.$store.dispatch('site/setSearch', this.word)
       this.scrollToResult()
     },
     scrollToResult() {

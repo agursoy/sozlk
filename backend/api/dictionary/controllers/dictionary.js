@@ -25,7 +25,7 @@ module.exports = {
       similar = await result.sort(function(a, b){
         return (a.similarity > b.similarity) ? -1 : 1;
       }).filter(function (a) {
-        return a.similarity !== 100 && a.similarity > 70
+        return a.similarity !== 100 && a.similarity > 50
       });
     }
 
