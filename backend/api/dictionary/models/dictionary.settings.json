@@ -25,6 +25,9 @@
     },
     "meta_2": {
       "type": "string"
+    },
+    "similars": {
+      "collection": "dictionary"
     }
   }
 }

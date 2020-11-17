@@ -12,6 +12,7 @@
   "devDependencies": {},
   "dependencies": {
     "knex": "<0.20.0",
+    "similarity": "^1.2.1",
     "slugify": "^1.4.5",
     "sqlite3": "latest",
     "strapi": "3.2.5",

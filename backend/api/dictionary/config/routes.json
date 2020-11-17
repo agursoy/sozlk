@@ -47,6 +47,15 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "POST",
+      "path": "/similar",
+      "handler": "dictionary.similar",
+      "config": {
+        "policies": []
+      }
     }
+
   ]
 }
