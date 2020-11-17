@@ -124,9 +124,11 @@ export default {
   async asyncData({ route, $strapi, payload }) {
     const similars = []
     if (payload) {
-      if (payload.similars && payload.similars.length) {
-        for await (const s of payload.similars) {
-          if (!similars.map((s) => s._id).includes(s._id)) similars.push(s)
+      for await (const p of payload) {
+        if (p.similars && p.similars.length) {
+          for await (const s of p.similars) {
+            if (!similars.map((s) => s._id).includes(s._id)) similars.push(s)
+          }
         }
       }
 
