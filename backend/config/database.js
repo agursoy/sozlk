@@ -14,6 +14,11 @@ module.exports = ({ env }) => ({
       options: {
         authenticationDatabase: env('AUTHENTICATION_DATABASE', null),
         ssl: env.bool('DATABASE_SSL', true),
+        pool: {
+          idleTimeoutMillis: 300000,
+          createTimeoutMillis: 300000,
+          acquireTimeoutMillis: 300000,
+        },
       },
     },
   },
