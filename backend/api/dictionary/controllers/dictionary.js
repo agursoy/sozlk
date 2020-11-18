@@ -1,6 +1,8 @@
 'use strict';
 
 const similarity = require('similarity')
+const { sanitizeEntity } = require('strapi-utils');
+
 
 
 /**
@@ -31,10 +33,31 @@ module.exports = {
 
     ctx.send(similar);
   },
-  find(ctx) {
+  async find(ctx) {
     if (ctx.query._q) {
       return strapi.services.dictionary.search(ctx.query);
     }
-    return strapi.services.dictionary.find(ctx.query, [ 'similars' ]);
+    if(ctx.query.mode){
+      if(ctx.query.mode === "full") {
+        delete ctx.query['mode']
+        return strapi.services.dictionary.find(ctx.query, [ 'similars' ]);
+      } else if (ctx.query.mode === "sitemap") {
+        delete ctx.query['mode']
+        const entities = await strapi.services.dictionary.find(ctx.query);
+        return entities.map(entity => {
+          const dictionary = sanitizeEntity(entity, {
+            model: strapi.models.dictionary,
+          });
+          return {
+            slug: dictionary.slug,
+            updatedAt: dictionary.updatedAt
+          };
+        });
+
+      }
+    }
+
+    console.log("find")
+    return strapi.services.dictionary.find(ctx.query);
   },
 };
