@@ -56,8 +56,6 @@ module.exports = {
 
       }
     }
-
-    console.log("find")
     return strapi.services.dictionary.find(ctx.query);
   },
 };

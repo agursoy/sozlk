@@ -176,7 +176,7 @@ export default {
       return async () => {
         const base = process.env.API_URL || 'http://localhost:1337'
         const { data } = await axios.get(
-          `${base}/dictionaries?_start=${offset}&_limit=${limit}`
+          `${base}/dictionaries?_start=${offset}&_limit=${limit}&mode=sitemap`
         )
         if (data) {
           return data.map((item) => {
@@ -209,11 +209,10 @@ export default {
           : 1
       for (let i = 0; i < repeat; i++) {
         const offset = i * requestLimit
-        const limit = requestLimit
         sitemaps.push({
           hostname: process.env.URL,
-          path: `/feed/sitemap-${item}-${offset}-${limit}.xml`,
-          routes: sitemapFunc(item, offset, limit - offset),
+          path: `/feed/sitemap-${item}-${offset}-${offset + requestLimit}.xml`,
+          routes: sitemapFunc(item, offset, requestLimit),
           exclude: ['/**'],
           trailingSlash: true,
         })
@@ -260,7 +259,7 @@ export default {
           const offset = i * requestLimit
           contentRequests.push(
             axios.get(
-              `${base}/dictionaries?_start=${offset}&_limit=${requestLimit}`
+              `${base}/dictionaries?_start=${offset}&_limit=${requestLimit}&mode=full`
             )
           )
         }
