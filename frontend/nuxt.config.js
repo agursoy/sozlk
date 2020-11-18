@@ -247,7 +247,7 @@ export default {
       }
       const types = ['words']
 
-      const requestLimit = 5000
+      const requestLimit = 10000
       const routes = []
       for (const item of types) {
         const count = info.counts[item]
