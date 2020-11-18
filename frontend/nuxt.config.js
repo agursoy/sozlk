@@ -228,7 +228,7 @@ export default {
 
   // Custom Genereate
   generate: {
-    concurrency: 5000,
+    concurrency: 500,
     fallback: true,
     async routes(callback) {
       const groupBy = function (xs, key) {
