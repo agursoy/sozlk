@@ -209,7 +209,7 @@ export default {
           : 1
       for (let i = 0; i < repeat; i++) {
         const offset = i * requestLimit
-        const limit = i * requestLimit + requestLimit
+        const limit = requestLimit
         sitemaps.push({
           hostname: process.env.URL,
           path: `/feed/sitemap-${item}-${offset}-${limit}.xml`,
@@ -228,7 +228,7 @@ export default {
 
   // Custom Genereate
   generate: {
-    concurrency: 500,
+    concurrency: 5000,
     fallback: true,
     async routes(callback) {
       const groupBy = function (xs, key) {
@@ -247,7 +247,7 @@ export default {
       }
       const types = ['words']
 
-      const requestLimit = 10000
+      const requestLimit = 5000
       const routes = []
       for (const item of types) {
         const count = info.counts[item]
@@ -258,10 +258,9 @@ export default {
         const contentRequests = []
         for (let i = 0; i < repeat; i++) {
           const offset = i * requestLimit
-          const limit = i * requestLimit + requestLimit
           contentRequests.push(
             axios.get(
-              `${base}/dictionaries?_start=${offset}&_limit=${limit}&mode=full`
+              `${base}/dictionaries?_start=${offset}&_limit=${requestLimit}&mode=full`
             )
           )
         }
