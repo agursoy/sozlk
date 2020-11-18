@@ -208,8 +208,11 @@ export default {
     },
   },
   mounted() {
-    if (this.results.length === 0) {
-      this.getSuggestions(this.search)
+    // eslint-disable-next-line nuxt/no-env-in-hooks
+    if (process.client) {
+      if (this.results.length === 0) {
+        this.getSuggestions(this.search)
+      }
     }
   },
   methods: {
