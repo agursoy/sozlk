@@ -9,32 +9,34 @@
           <div
             class="text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7"
           >
-            <div>
-              <p
-                v-if="showNoResult"
-                class="pt-6 text-base leading-6 font-bold sm:text-lg sm:leading-7"
-              >
-                Maalesef Aradığınız Kelime Bulunamadı
-              </p>
-
-              <div v-else-if="results.length === 0 && suggestions.length > 0">
+            <client-only>
+              <div>
                 <p
+                  v-if="showNoResult"
                   class="pt-6 text-base leading-6 font-bold sm:text-lg sm:leading-7"
                 >
-                  Bunu mu demek istediniz?
+                  Maalesef Aradığınız Kelime Bulunamadı
                 </p>
-                <div class="py-5">
-                  <span
-                    v-for="(suggest, key) in suggestions"
-                    :key="key"
-                    class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                    ><a :href="`/${suggest.slug}/`"
-                      >#{{ suggest.word }}</a
-                    ></span
+
+                <div v-else-if="results.length === 0 && suggestions.length > 0">
+                  <p
+                    class="pt-6 text-base leading-6 font-bold sm:text-lg sm:leading-7"
                   >
+                    Bunu mu demek istediniz?
+                  </p>
+                  <div class="py-5">
+                    <span
+                      v-for="(suggest, key) in suggestions"
+                      :key="key"
+                      class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                      ><a :href="`/${suggest.slug}/`"
+                        >#{{ suggest.word }}</a
+                      ></span
+                    >
+                  </div>
                 </div>
               </div>
-            </div>
+            </client-only>
             <div v-if="results.length > 0">
               <p
                 class="pt-6 pb-6 text-base leading-6 font-bold sm:text-lg sm:leading-7"
@@ -219,7 +221,7 @@ export default {
           meta1: meta[0],
           meta2: meta[1],
         })
-        if (this.getSuggestions.length === 0) {
+        if (this.suggestions.length === 0) {
           this.showNoResult = true
         }
       }
