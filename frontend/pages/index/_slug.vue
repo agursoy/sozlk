@@ -201,8 +201,11 @@ export default {
   watch: {
     results: {
       handler(val) {
-        if (val.length === 0) {
-          this.getSuggestions(this.search)
+        // eslint-disable-next-line nuxt/no-env-in-hooks
+        if (process.client) {
+          if (val.length === 0) {
+            this.getSuggestions(this.search)
+          }
         }
       },
     },
