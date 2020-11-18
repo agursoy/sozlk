@@ -176,7 +176,7 @@ export default {
       return async () => {
         const base = process.env.API_URL || 'http://localhost:1337'
         const { data } = await axios.get(
-          `${base}/dictionaries?_start=${offset}&_limit=${limit}&mode=sitemap`
+          `${base}/dictionaries?_start=${offset}&_limit=${limit}`
         )
         if (data) {
           return data.map((item) => {
@@ -260,7 +260,7 @@ export default {
           const offset = i * requestLimit
           contentRequests.push(
             axios.get(
-              `${base}/dictionaries?_start=${offset}&_limit=${requestLimit}&mode=full`
+              `${base}/dictionaries?_start=${offset}&_limit=${requestLimit}`
             )
           )
         }
