@@ -8,8 +8,10 @@ export default {
   // Server configuration
   server: {
     https: {
-      key: fs.readFileSync('/etc/letsencrypt/live/sozlk.com/privkey.pem'),
-      cert: fs.readFileSync('/etc/letsencrypt/live/sozlk.com/fullchain.pem'),
+      key: fs.readFileSync('/etc/letsencrypt/archive/sozlk.com/privkey1.pem'),
+      cert: fs.readFileSync(
+        '/etc/letsencrypt/archive/sozlk.com/fullchain1.pem'
+      ),
     },
   },
   serverMiddleware: ['redirect-ssl'],
