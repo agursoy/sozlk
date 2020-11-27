@@ -18,6 +18,7 @@
     "core-js": "^3.6.5",
     "double-metaphone": "^1.0.5",
     "nuxt": "^2.14.7",
+    "redirect-ssl": "^2.0.0",
     "slugify": "^1.4.6",
     "smoothscroll-polyfill": "^0.4.4"
   },

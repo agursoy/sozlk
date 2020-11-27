@@ -21,6 +21,6 @@ VOLUME /etc/letsencrypt
 # This installs a Crontab entry which
 # runs "certbot renew" on several days of each week at 03:22 AM
 #
-# RUN echo "22 03 * * 2,4,6,7 root /scripts/certbot-auto renew" >/etc/cron.d/certbot
+RUN echo "22 03 * * 2,4,6,7 root /scripts/certbot-auto renew" >/etc/cron.d/certbot
 
 CMD [ "cron", "-f" ]

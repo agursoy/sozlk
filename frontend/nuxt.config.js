@@ -1,9 +1,18 @@
+import path from 'path'
+import fs from 'fs'
 import axios from 'axios'
 
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
-
+  // Server configuration
+  server: {
+    https: {
+      key: fs.readFileSync('/etc/letsencrypt/live/sozlk.com/privkey.pem'),
+      cert: fs.readFileSync('/etc/letsencrypt/live/sozlk.com/fullchain.pem'),
+    },
+  },
+  serverMiddleware: ['redirect-ssl'],
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'Sozlk. | 50.000+ fazla Osmanlıca Kelime',
@@ -251,9 +260,9 @@ export default {
       for (const item of types) {
         const count = info.counts[item]
         const repeat = 1
-          // Math.ceil(count / requestLimit) > 0
-          //  ? Math.ceil(count / requestLimit)
-          //  : 1
+        // Math.ceil(count / requestLimit) > 0
+        //  ? Math.ceil(count / requestLimit)
+        //  : 1
         const contentRequests = []
         for (let i = 0; i < repeat; i++) {
           const offset = i * requestLimit
