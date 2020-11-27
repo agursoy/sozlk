@@ -8,6 +8,9 @@ services:
     env_file:
       - ./frontend/.env
     restart: always
+    volumes:
+      - certbot-webroot-sozlk.com:/frontend/dist/.well-known
+      - certbot-letsencrypt:/etc/letsencrypt
   strapi:
     build: ./backend
     ports:
@@ -15,3 +18,13 @@ services:
     network_mode: bridge
     env_file:
       - ./backend/.env
+  certbot:
+    build: ./certbot
+    container_name: certbot
+    restart: always
+    volumes:
+      - certbot-webroot-sozlk.com:/webroots/sozlk.com.com/.well-known
+      - certbot-letsencrypt:/etc/letsencrypt
+volumes:
+  certbot-webroot-sozlk.com:
+  certbot-letsencrypt: 
