@@ -24,7 +24,7 @@ services:
     container_name: certbot
     restart: always
     volumes:
-      - certbot-webroot-sozlk.com:/webroots/sozlk.com.com/.well-known
+      - certbot-webroot-sozlk.com:/webroots/sozlk.com/.well-known
       - certbot-letsencrypt:/etc/letsencrypt
 volumes:
   certbot-webroot-sozlk.com:
