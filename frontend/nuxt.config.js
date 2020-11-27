@@ -1,5 +1,5 @@
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
 import axios from 'axios'
 
 export default {
@@ -8,9 +8,17 @@ export default {
   // Server configuration
   server: {
     https: {
-      key: fs.readFileSync('/etc/letsencrypt/archive/sozlk.com/privkey1.pem'),
+      key: fs.readFileSync(
+        path.resolve(
+          __dirname,
+          '/etc/letsencrypt/archive/sozlk.com/privkey1.pem'
+        )
+      ),
       cert: fs.readFileSync(
-        '/etc/letsencrypt/archive/sozlk.com/fullchain1.pem'
+        path.resolve(
+          __dirname,
+          '/etc/letsencrypt/archive/sozlk.com/fullchain1.pem'
+        )
       ),
     },
   },
