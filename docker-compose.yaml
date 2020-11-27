@@ -9,7 +9,7 @@ services:
     env_file:
       - ./frontend/.env
     volumes:
-      - certbot-webroot-sozlk.com:/frontend/dist/.well-known
+      - certbot-webroot-sozlk.com:/frontend/static/.well-known
       - certbot-letsencrypt:/etc/letsencrypt
   strapi:
     build: ./backend
