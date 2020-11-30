@@ -12,7 +12,7 @@ services:
     volumes:
       - certbot-webroot-sozlk.com:/usr/src/app/.well-known
       - certbot-letsencrypt:/etc/letsencrypt
-      - certbot-letsencrypt:/usr/src/app/certifcates
+      - certbot-letsencrypt:/usr/src/app/certificates
   strapi:
     build: ./backend
     ports:
