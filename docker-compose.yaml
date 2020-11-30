@@ -3,8 +3,7 @@ services:
   nuxt:
     build: ./frontend
     ports:
-      - "80:3000"
-    network_mode: bridge
+      - "3000:3000"
     restart: always
     env_file:
       - ./frontend/.env

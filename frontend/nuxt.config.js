@@ -135,7 +135,7 @@ export default {
         overlayBottom: true,
       },
     ], */
-    // ['@nuxtjs/sitemap'],
+    ['@nuxtjs/sitemap'],
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
@@ -248,14 +248,14 @@ export default {
       }
       const types = ['words']
 
-      const requestLimit = 50
+      const requestLimit = 5000
       const routes = []
       for (const item of types) {
         const count = info.counts[item]
-        const repeat = 1
-        // Math.ceil(count / requestLimit) > 0
-        //  ? Math.ceil(count / requestLimit)
-        //  : 1
+        const repeat =
+          Math.ceil(count / requestLimit) > 0
+            ? Math.ceil(count / requestLimit)
+            : 1
         const contentRequests = []
         for (let i = 0; i < repeat; i++) {
           const offset = i * requestLimit
