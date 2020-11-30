@@ -9,16 +9,10 @@ export default {
   server: {
     https: {
       key: fs.readFileSync(
-        path.resolve(
-          __dirname,
-          '/etc/letsencrypt/archive/sozlk.com/privkey1.pem'
-        )
+        path.resolve(__dirname, '/certifcates/live/sozlk.com/privkey1.pem')
       ),
       cert: fs.readFileSync(
-        path.resolve(
-          __dirname,
-          '/etc/letsencrypt/archive/sozlk.com/fullchain1.pem'
-        )
+        path.resolve(__dirname, '/certifcates/live/sozlk.com/fullchain1.pem')
       ),
     },
   },
