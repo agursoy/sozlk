@@ -8,12 +8,8 @@ export default {
   // Server configuration
   server: {
     https: {
-      key: fs.readFileSync(
-        path.resolve(__dirname, '/certificates/live/sozlk.com/privkey.pem')
-      ),
-      cert: fs.readFileSync(
-        path.resolve(__dirname, '/certificates/live/sozlk.com/fullchain.pem')
-      ),
+      key: fs.readFileSync('certificates/live/sozlk.com/privkey.pem'),
+      cert: fs.readFileSync('certificates/live/sozlk.com/fullchain.pem'),
     },
   },
   serverMiddleware: ['redirect-ssl'],
