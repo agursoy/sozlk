@@ -5,13 +5,6 @@ import axios from 'axios'
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
-  // Server configuration
-  server: {
-    https: {
-      key: fs.readFileSync('certificates/live/sozlk.com/privkey.pem'),
-      cert: fs.readFileSync('certificates/live/sozlk.com/fullchain.pem'),
-    },
-  },
   serverMiddleware: ['redirect-ssl'],
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
