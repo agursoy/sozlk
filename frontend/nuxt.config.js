@@ -193,7 +193,9 @@ export default {
       }
     }
     const { data } = await axios.get(
-      `${process.env.GENERATE_URL || 'http://localhost:1337'}/dictionaries/count`
+      `${
+        process.env.GENERATE_URL || 'http://localhost:1337'
+      }/dictionaries/count`
     )
     const info = {
       counts: {
