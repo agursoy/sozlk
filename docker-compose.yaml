@@ -1,9 +1,17 @@
 version: '3'
 services:
+  strapi:
+    build: ./backend
+    ports:
+      - "1337:1337"
+    env_file:
+      - ./backend/.env
   nuxt:
     build: ./frontend
     ports:
       - "3000:3000"
+    depends_on:
+      - "strapi"
     restart: always
     env_file:
       - ./frontend/.env
@@ -13,18 +21,12 @@ services:
       - certbot-webroot-sozlk.com:/usr/src/app/.well-known
       - certbot-letsencrypt:/etc/letsencrypt
     networks:
-      - strapi_some-net
-  strapi:
-    build: ./backend
-    ports:
-      - "1337:1337"
-    env_file:
-      - ./backend/.env
-    networks:
-      - some-net
+      - strapi_default
   certbot:
     build: ./certbot
     container_name: certbot
+    depends_on:
+      - "nuxt"
     restart: always
     volumes:
       - certbot-webroot-sozlk.com:/webroots/sozlk.com/.well-known
@@ -32,6 +34,8 @@ services:
   nginx:
     build: ./nginx
     container_name: nginx
+    depends_on:
+      - "certbot"
     ports:
       - "80:80"
       - "443:443"
@@ -44,5 +48,5 @@ volumes:
   certbot-letsencrypt:
 
 networks:
-  strapi_some-net:
+  strapi_default:
     external: true
