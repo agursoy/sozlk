@@ -176,7 +176,7 @@ export default {
     const sitemaps = []
     const sitemapFunc = function (type, offset, limit) {
       return async () => {
-        const base = process.env.API_URL || 'http://localhost:1337'
+        const base = process.env.GENERATE_URL || 'http://localhost:1337'
         const { data } = await axios.get(
           `${base}/dictionaries?_start=${offset}&_limit=${limit}&mode=sitemap`
         )
@@ -239,7 +239,7 @@ export default {
         }, {})
       }
 
-      const base = process.env.API_URL || 'http://localhost:1337'
+      const base = process.env.GENERATE_URL || 'http://localhost:1337'
       const { data } = await axios.get(`${base}/dictionaries/count`)
       const info = {
         counts: {
