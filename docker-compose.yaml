@@ -12,13 +12,16 @@ services:
     volumes:
       - certbot-webroot-sozlk.com:/usr/src/app/.well-known
       - certbot-letsencrypt:/etc/letsencrypt
+    networks:
+      - strapi_some-net
   strapi:
     build: ./backend
     ports:
       - "1337:1337"
-    network_mode: bridge
     env_file:
       - ./backend/.env
+    networks:
+      - some-net
   certbot:
     build: ./certbot
     container_name: certbot
@@ -38,4 +41,8 @@ services:
       - certbot-letsencrypt:/etc/letsencrypt
 volumes:
   certbot-webroot-sozlk.com:
-  certbot-letsencrypt: 
+  certbot-letsencrypt:
+
+networks:
+  strapi_some-net:
+    external: true
