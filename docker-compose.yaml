@@ -16,7 +16,7 @@ services:
     env_file:
       - ./frontend/.env
     links:
-      - "strapi:strapi"
+      - "strapi"
     volumes:
       - certbot-webroot-sozlk.com:/usr/src/app/.well-known
       - certbot-letsencrypt:/etc/letsencrypt
