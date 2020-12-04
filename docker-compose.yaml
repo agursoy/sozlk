@@ -6,6 +6,8 @@ services:
       - "1337:1337"
     env_file:
       - ./backend/.env
+    networks:
+      - backend
   nuxt:
     build: ./frontend
     ports:
@@ -21,7 +23,7 @@ services:
       - certbot-webroot-sozlk.com:/usr/src/app/.well-known
       - certbot-letsencrypt:/etc/letsencrypt
     networks:
-      - strapi_default
+      - backend
   certbot:
     build: ./certbot
     container_name: certbot
@@ -46,7 +48,6 @@ services:
 volumes:
   certbot-webroot-sozlk.com:
   certbot-letsencrypt:
-
 networks:
-  strapi_default:
-    external: true
+  backend:
+    driver: "bridge"
