@@ -4,6 +4,7 @@ FROM debian:jessie
 # https://hub.docker.com/r/gaafar/cron/
 
 # Install cron, certbot, bash, plus any other dependencies
+RUN add-apt-repository universe
 RUN apt-get update \
    && apt-get install -y cron bash wget universe
 RUN mkdir -p /webroots/sozlk.com/.well-known /scripts
