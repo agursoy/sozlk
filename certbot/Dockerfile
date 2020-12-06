@@ -4,15 +4,20 @@ FROM debian:jessie
 # https://hub.docker.com/r/gaafar/cron/
 
 # Install cron, certbot, bash, plus any other dependencies
+RUN apt install -y software-properties-common
+
+RUN add-apt-repository -y ppa:certbot/certbot
+
 RUN apt-get update \
    && apt-get install -y cron bash wget
 RUN mkdir -p /webroots/sozlk.com/.well-known /scripts
 
 WORKDIR /scripts
-RUN wget https://dl.eff.org/certbot-auto
-RUN chmod a+x ./certbot-auto
+RUN apt -y install certbot python3-certbot-nginx
+RUN certbot --version
+
 # Run certbot-auto so that it installs itself
-RUN /scripts/certbot-auto certonly --webroot -w /webroots/sozlk.com -d sozlk.com
+RUN certbot certonly --webroot -w /webroots/sozlk.com -d sozlk.com
 
 # /webroots/DOMAIN.TLD/.well-known/... files go here
 VOLUME /webroots
