@@ -12,7 +12,7 @@ WORKDIR /scripts
 RUN wget https://dl.eff.org/certbot-auto
 RUN chmod a+x ./certbot-auto
 # Run certbot-auto so that it installs itself
-RUN /scripts/certbot-auto -n certificates
+RUN /scripts/certbot-auto certonly --webroot -w /webroots/sozlk.com -d sozlk.com
 
 # /webroots/DOMAIN.TLD/.well-known/... files go here
 VOLUME /webroots
