@@ -5,7 +5,7 @@ FROM debian:jessie
 
 # Install cron, certbot, bash, plus any other dependencies
 RUN apt-get update \
-   && apt-get install -y cron bash wget universe
+   && apt-get install -y cron bash wget
 RUN mkdir -p /webroots/sozlk.com/.well-known /scripts
 
 WORKDIR /scripts
