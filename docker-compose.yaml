@@ -15,9 +15,6 @@ services:
     restart: always
     env_file:
       - ./frontend/.env
-    volumes:
-      - certbot-webroot-sozlk.com:/usr/src/app/.well-known
-      - certbot-letsencrypt:/etc/letsencrypt
   certbot:
     image: certbot/certbot
     restart: unless-stopped
