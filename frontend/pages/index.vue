@@ -127,6 +127,7 @@ import slugify from 'slugify'
 export default {
   asyncData({ payload }) {
     const mostSearch = []
+    /*
     const itemCount = 24
     const max = 50000
 
@@ -138,7 +139,8 @@ export default {
         }
       }
     } else {
-      /*
+      */
+    /*
       TEST FOR LOCAL
 
       try {
@@ -168,8 +170,7 @@ export default {
           mostSearch = result
         }
       } catch (e) {}
-       */
-    }
+    } */
 
     return {
       mostSearch,
