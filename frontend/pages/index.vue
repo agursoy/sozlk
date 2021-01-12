@@ -7,13 +7,7 @@
  </div-->
     <div class="w-full flex flex-wrap">
       <!-- Login Section -->
-      <div
-        class="w-full md:w-1/2 flex flex-col"
-        :class="{
-          'h-screen/1-8': mostSearch.length > 0,
-          'h-screen': mostSearch.length === 0,
-        }"
-      >
+      <div class="w-full md:w-1/2 flex flex-col h-screen">
         <div
           class="flex justify-center md:justify-start pt-12 md:pl-12 md:-mb-24"
         >
@@ -73,51 +67,6 @@
         <adsbygoogle />
       </div>
     </div-->
-    <div class="container mx-auto px-4 md:px-12 pt-1">
-      <div class="flex flex-wrap lg:-mx-4">
-        <!-- Column -->
-        <div
-          v-for="(searchItem, key) in mostSearch"
-          :key="key"
-          class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3"
-        >
-          <div class="max-w-sm rounded shadow-lg">
-            <div class="px-6 py-4">
-              <div class="font-bold text-teal-500 text-xl mb-2">
-                <a target="_blank" :href="`/${searchItem[0].slug}/`">
-                  {{ searchItem[0].word }}
-                </a>
-              </div>
-              <p
-                class="text-gray-700 text-base h-12 md:h-24 overflow-hidden break-all"
-              >
-                {{ searchItem[0].meaning }}
-              </p>
-            </div>
-            <div class="px-6 pt-4 pb-2">
-              <span
-                v-for="(similar, key) in searchItem[0].similars"
-                :key="key"
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                ><a target="_blank" :href="`/${similar.slug}/`"
-                  >#{{ similar.word }}</a
-                ></span
-              >
-            </div>
-            <div class="px-6 py-4 flex justify-center">
-              <a target="_blank" :href="`/${searchItem[0].slug}/`">
-                <span
-                  class="bg-transparent hover:bg-teal-500 text-teal-700 hover:text-white py-2 px-4 border border-teal-500 hover:border-transparent rounded-full"
-                  >Tamamını Gör</span
-                >
-              </a>
-            </div>
-          </div>
-          <!-- END Article -->
-        </div>
-        <!-- END Column -->
-      </div>
-    </div>
   </div>
 </template>
 
@@ -125,57 +74,6 @@
 import slugify from 'slugify'
 
 export default {
-  asyncData({ payload }) {
-    const mostSearch = []
-    /*
-    const itemCount = 24
-    const max = 50000
-
-    if (payload) {
-      for (let i = 0; i < itemCount; i++) {
-        const random = Math.floor(Math.random() * (max + 1))
-        if (payload[random]) {
-          mostSearch.push([payload[random]])
-        }
-      }
-    } else {
-      */
-    /*
-      TEST FOR LOCAL
-
-      try {
-        const promises = []
-        for (let i = 0; i < itemCount; i++) {
-          const random = Math.floor(Math.random() * (max + 1))
-          promises.push(
-            $strapi.$http.$get(
-              `dictionaries?_start=${random - itemCount}&_limit=1`
-            )
-          )
-        }
-        const result = await Promise.all(promises)
-
-        for (let i = 0; i < result.length; i++) {
-          const obj = result[i][0]
-          const simRes = await $strapi.$http.$post('similar', {
-            word: obj.word,
-            meta1: obj.meta_1,
-            meta2: obj.meta_2,
-          })
-
-          obj.similarity = simRes
-        }
-
-        if (result.length) {
-          mostSearch = result
-        }
-      } catch (e) {}
-    } */
-
-    return {
-      mostSearch,
-    }
-  },
   data() {
     return {
       word: null,
