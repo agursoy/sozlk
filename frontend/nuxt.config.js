@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
-  target: 'static',
+  target: 'server',
   serverMiddleware: ['redirect-ssl'],
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -228,6 +228,7 @@ export default {
   },
 
   // Custom Genereate
+  /*
   generate: {
     concurrency: 5000,
     fallback: true,
@@ -282,4 +283,5 @@ export default {
       callback(null, routes)
     },
   },
+  */
 }
