@@ -3,7 +3,7 @@ import axios from 'axios'
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'server',
-  serverMiddleware: ['redirect-ssl'],
+  // serverMiddleware: ['redirect-ssl'],
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'Sozlk. | 50.000+ fazla Osmanlıca Kelime',
