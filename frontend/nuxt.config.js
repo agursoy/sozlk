@@ -3,7 +3,6 @@ import axios from 'axios'
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'server',
-  // serverMiddleware: ['redirect-ssl'],
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'Sozlk. | 50.000+ fazla Osmanlıca Kelime',
@@ -193,6 +192,9 @@ export default {
     const { data } = await axios.get(
       `${process.env.API_URL || 'http://localhost:1337'}/dictionaries/count`
     )
+    console.log(
+      `${process.env.API_URL || 'http://localhost:1337'}/dictionaries/count`
+    )
     const info = {
       counts: {
         words: data,
@@ -209,6 +211,9 @@ export default {
           : 1
       for (let i = 0; i < repeat; i++) {
         const offset = i * requestLimit
+        console.log(
+          `/feed/sitemap-${item}-${offset}-${offset + requestLimit}.xml`
+        )
         sitemaps.push({
           hostname: process.env.URL,
           path: `/feed/sitemap-${item}-${offset}-${offset + requestLimit}.xml`,
