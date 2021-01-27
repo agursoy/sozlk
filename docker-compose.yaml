@@ -1,12 +1,14 @@
 version: "3"
 services:
   strapi:
+    container_name: strapi
     build: ./backend
     ports:
       - "1337:1337"
     env_file:
       - ./backend/.env
   nuxt:
+    container_name: nuxt
     build: ./frontend
     ports:
       - "3000:3000"
