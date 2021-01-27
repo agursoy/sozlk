@@ -11,5 +11,5 @@ COPY ./ ./
 ENV NUXT_HOST=0.0.0.0
 ENV NODE_ENV=production
 
-RUN npm run generate
+RUN npm run build
 CMD [ "npm", "start" ]
