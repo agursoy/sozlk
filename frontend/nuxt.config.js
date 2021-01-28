@@ -169,6 +169,7 @@ export default {
   },
 
   // Sitemap
+  /*
   async sitemap() {
     const sitemaps = []
     const sitemapFunc = function (type, offset, limit) {
@@ -233,6 +234,7 @@ export default {
       sitemaps,
     }
   },
+  */
 
   // Custom Genereate
   /*
